@@ -1,0 +1,33 @@
+body {
+	background-image: url(../img/background.jpeg);
+	font-family: 'Raleway', sans-serif;
+	font-weight: lighter;
+}
+
+.center-content {
+	padding-top: 10%;
+	text-align: center;
+}
+
+#quantiphi-logo-main {
+	width: 20%;
+	height: 20%;
+}
+
+#welcome-message {
+	margin-top: 0px;
+	margin-bottom: 20px;
+	font-size: 70px;
+}
+
+#intro-button {
+	color: white;
+	text-transform: uppercase;
+	background-color: rgb(29, 153, 119);
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 20px;
+	padding-left: 20px;
+	font-size: 20px;
+	box-shadow: 3px 10px rgba(0, 0, 0, 0.2);
+}
