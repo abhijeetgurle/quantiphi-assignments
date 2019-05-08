@@ -15,6 +15,17 @@ var DOMstrings = {
 	goose_div: 'goose-div',
 	star_rating: '.star-rating',
 	fa_star: '.fa-star',
+	department_button: '.department-button',
+	reasons_for_selection: '.reasons-for-selection',
+	checkbox_1: 'checkbox-1',
+	checkbox_2: 'checkbox-2',
+	checkbox_3: 'checkbox-3',
+	checkbox_4: 'checkbox-4',
+	textarea_1: 'textarea-1',
+	textarea_2: 'textarea-2',
+	star_1: '1',
+	dept_button: 'dept-button',
+	next_page: 'next-page'
 };
 
 
@@ -29,10 +40,10 @@ function makeAllBlur() {
 
 
 function showRating(starID) {
-	id = parseInt(starID, 10);
+	var id = parseInt(starID, 10);
 	
 	for(var i=1; i<=id; i+=1) {
-		element = document.getElementById(i.toString());
+		var element = document.getElementById(i.toString());
 		if(!element.classList.contains('star-checked')) {
 			element.classList.add('star-checked');
 		}
@@ -46,7 +57,7 @@ function showRating(starID) {
 
 
 function addRatingListener() {
-	stars = document.querySelectorAll(DOMstrings.fa_star);
+	var stars = document.querySelectorAll(DOMstrings.fa_star);
 
 	stars.forEach(function (star) {
 		star.addEventListener('click', function() {
@@ -56,8 +67,73 @@ function addRatingListener() {
 }
 
 
+function isEmpty(str) {
+	for(var i=0; i<str.length; i++) {
+		if(str[i]!==' ') {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
+function enableDeptButton() {
+	var button = document.getElementById(DOMstrings.dept_button);
+	button.style.backgroundColor = 'rgb(29, 153, 119)';
+
+	var link = document.getElementById(DOMstrings.next_page);
+	link.href = 'index.html';
+}
+
+
+function disableDeptButton() {
+	var button = document.getElementById(DOMstrings.dept_button);
+	button.style.backgroundColor = 'gray';
+
+	var link = document.getElementById(DOMstrings.next_page);
+	link.href = '#';
+}
+
+
+function checkFormFull(event) {
+	var starsComplete = document.getElementById(DOMstrings.star_1).classList.contains('star-checked');
+	
+	var checkbox_1 = document.getElementById(DOMstrings.checkbox_1).checked;
+	var checkbox_2 = document.getElementById(DOMstrings.checkbox_2).checked;
+	var checkbox_3 = document.getElementById(DOMstrings.checkbox_3).checked;
+	var checkbox_4 = document.getElementById(DOMstrings.checkbox_4).checked;
+
+	var textarea_1 = document.getElementById(DOMstrings.textarea_1).value;
+	var textarea_2 = document.getElementById(DOMstrings.textarea_2).value;
+	var textareaOneFilled = isEmpty(textarea_1);
+	var textareaTwoFilled = isEmpty(textarea_2);
+	
+	if(starsComplete && (checkbox_1 || checkbox_2 || checkbox_3 || checkbox_4) && textareaOneFilled && textareaTwoFilled) {
+		enableDeptButton();
+	}
+	else {
+		disableDeptButton();
+	}
+}
+
+
+function addEventListenersToForm() {
+	var stars = document.querySelectorAll(DOMstrings.fa_star);
+
+	stars.forEach(function (star) {
+		star.addEventListener('click', checkFormFull);
+	});
+
+	document.querySelector(DOMstrings.reasons_for_selection).addEventListener('click', checkFormFull);
+	document.getElementById(DOMstrings.textarea_1).addEventListener('keyup', checkFormFull);
+	document.getElementById(DOMstrings.textarea_2).addEventListener('keyup', checkFormFull);
+}
+
+
 function processForm() {
 	addRatingListener();
+	addEventListenersToForm();
 }
 
 
@@ -76,22 +152,22 @@ function displayForm(type, typeID) {
 					<h2>Share your reasons for selecting <span>${type}</span></h2>
 					
 					<label>
-						<input type="checkbox" name="reason">
+						<input id="checkbox-1" type="checkbox" name="reason">
 						Lorem ipsum dolor sit amet
 					</label>
 
 					<label>
-						<input type="checkbox" name="reason">
+						<input id="checkbox-2" type="checkbox" name="reason">
 						Lorem ipsum dolor sit amet
 					</label>
 
 					<label>
-						<input type="checkbox" name="reason">
+						<input id="checkbox-3" type="checkbox" name="reason">
 						Lorem ipsum dolor sit amet
 					</label>
 
 					<label>
-						<input type="checkbox" name="reason">
+						<input id="checkbox-4" type="checkbox" name="reason">
 						Lorem ipsum dolor sit amet
 					</label>
 				</div>
@@ -100,15 +176,12 @@ function displayForm(type, typeID) {
 
 			<div class="more-reasons-for-selection">
 				<h2>Any more reasons?</h2>
-				<textarea placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." rows="6">
-				</textarea>
+				<textarea id="textarea-1" placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." rows="6"></textarea>
 			</div>
 
 			<div class="suggestions">
 				<h2>Suggestions</h2>
-				<textarea rows="6">
-					
-				</textarea>
+				<textarea id="textarea-2" rows="6"></textarea>
 			</div>`;
 
 	document.querySelector(DOMstrings.invisible_content).innerHTML = '';
@@ -117,6 +190,8 @@ function displayForm(type, typeID) {
 	makeAllBlur();
 	document.getElementById(typeID).style.opacity = '1';
 	document.querySelector(DOMstrings.invisible_content).insertAdjacentHTML('beforeend', html);
+	document.querySelector(DOMstrings.department_button).style.display = 'block';
+
 	processForm();
 }
 

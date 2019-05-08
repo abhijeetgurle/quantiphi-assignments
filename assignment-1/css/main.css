@@ -79,8 +79,20 @@ body {
 	margin-right: 5%;
 }
 
-.dep-description {
+.info-div {	
 	width: 70%;
+}
+
+.department-button {
+	position: absolute;
+	left: 68%;
+	top: 20%;
+	text-transform: uppercase;
+	display: none;
+}
+
+.department-button button {
+	background-color: gray;
 }
 
 .choose-mascot {
