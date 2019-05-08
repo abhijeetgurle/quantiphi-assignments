@@ -1,3 +1,4 @@
+// object containing all classes and ID's needed
 var DOMstrings = {
 	oyster: '#oyster',
 	cat: '#cat',
@@ -25,11 +26,15 @@ var DOMstrings = {
 	textarea_2: 'textarea-2',
 	star_1: '1',
 	dept_button: 'dept-button',
-	next_page: 'next-page'
+	next_page: 'next-page',
+	rating_remark: 'rating-remark'
 };
 
 
+// Function to make all mascot images blur
 function makeAllBlur() {
+
+	// Set the opacity of each mascot image to 0.2
 	document.getElementById(DOMstrings.oyster_div).style.opacity = '0.2';
 	document.getElementById(DOMstrings.cat_div).style.opacity = '0.2';
 	document.getElementById(DOMstrings.whale_div).style.opacity = '0.2';
@@ -39,9 +44,13 @@ function makeAllBlur() {
 }
 
 
+// Function to display star rating
 function showRating(starID) {
+
+	// 1. Get the id of star clicked
 	var id = parseInt(starID, 10);
 	
+	// 2. Make all stars less than equal to id checked
 	for(var i=1; i<=id; i+=1) {
 		var element = document.getElementById(i.toString());
 		if(!element.classList.contains('star-checked')) {
@@ -49,16 +58,39 @@ function showRating(starID) {
 		}
 	}
 
+	// 3. Make all stars greater than id unchecked
 	for(var i=id+1; i<=5; i++) {
-		element = document.getElementById(i.toString());
+		var element = document.getElementById(i.toString());
 		element.classList.remove('star-checked');
+	}
+
+	// 4. Display remarks of selected rating besides star
+	var element = document.getElementById(DOMstrings.rating_remark);
+	if(id===1) {
+		element.innerHTML = 'Lorem ipsum dolor';
+	}
+	else if(id===2) {
+		element.innerHTML = 'Lorem ipsum dolor';
+	}
+	else if(id===3) {
+		element.innerHTML = 'Lorem ipsum dolor';
+	}
+	else if(id===4) {
+		element.innerHTML = 'Lorem ipsum dolor';
+	}
+	else {
+		element.innerHTML = 'Lorem ipsum dolor';
 	}
 }
 
 
+// Function to add click listener on stars
 function addRatingListener() {
+
+	// 1. Get all the stars using DOM 
 	var stars = document.querySelectorAll(DOMstrings.fa_star);
 
+	// 2. add click event listener on each star 
 	stars.forEach(function (star) {
 		star.addEventListener('click', function() {
 			showRating(star.id);
@@ -67,7 +99,9 @@ function addRatingListener() {
 }
 
 
+// Function to check whether passed string is empty or not
 function isEmpty(str) {
+
 	for(var i=0; i<str.length; i++) {
 		if(str[i]!==' ') {
 			return true;
@@ -78,66 +112,94 @@ function isEmpty(str) {
 }
 
 
+// Enable go to next department button
 function enableDeptButton() {
-	var button = document.getElementById(DOMstrings.dept_button);
-	button.style.backgroundColor = 'rgb(29, 153, 119)';
 
+	// 1. Get the button using DOM
+	var button = document.getElementById(DOMstrings.dept_button);
+	// 2. Set the background color of button to blue
+	button.style.backgroundColor = 'rgb(29, 153, 119)';
+	// 3. set the href attribute of button to index.html
 	var link = document.getElementById(DOMstrings.next_page);
 	link.href = 'index.html';
 }
 
 
+// Disable go to next department button
 function disableDeptButton() {
-	var button = document.getElementById(DOMstrings.dept_button);
-	button.style.backgroundColor = 'gray';
 
+	// 1. Get the button using DOM
+	var button = document.getElementById(DOMstrings.dept_button);
+	// 2. Set the background color of button to gray
+	button.style.backgroundColor = 'gray';
+	// 3. Set the href attribut to #
 	var link = document.getElementById(DOMstrings.next_page);
 	link.href = '#';
 }
 
 
+// Function to check form is completely filled or not
 function checkFormFull(event) {
+
+	// 1. Checked whether 1st star is clicked or not
 	var starsComplete = document.getElementById(DOMstrings.star_1).classList.contains('star-checked');
 	
+	// 2. Get states of all checkboxes
 	var checkbox_1 = document.getElementById(DOMstrings.checkbox_1).checked;
 	var checkbox_2 = document.getElementById(DOMstrings.checkbox_2).checked;
 	var checkbox_3 = document.getElementById(DOMstrings.checkbox_3).checked;
 	var checkbox_4 = document.getElementById(DOMstrings.checkbox_4).checked;
-
+	
+	// 3. check whether textareas are empty or not
 	var textarea_1 = document.getElementById(DOMstrings.textarea_1).value;
 	var textarea_2 = document.getElementById(DOMstrings.textarea_2).value;
 	var textareaOneFilled = isEmpty(textarea_1);
 	var textareaTwoFilled = isEmpty(textarea_2);
 	
+	// 4. combined all above in one if statement
 	if(starsComplete && (checkbox_1 || checkbox_2 || checkbox_3 || checkbox_4) && textareaOneFilled && textareaTwoFilled) {
+		// Enable button if everything is filled
 		enableDeptButton();
 	}
 	else {
+		// Disable button if everything is not filled
 		disableDeptButton();
 	}
 }
 
 
+// Function to add event listeners to input fields
 function addEventListenersToForm() {
-	var stars = document.querySelectorAll(DOMstrings.fa_star);
 
+	// 1. add event listeners to stars
+	var stars = document.querySelectorAll(DOMstrings.fa_star);
 	stars.forEach(function (star) {
 		star.addEventListener('click', checkFormFull);
 	});
 
+	// 2. add event listeners to checkboxes
 	document.querySelector(DOMstrings.reasons_for_selection).addEventListener('click', checkFormFull);
+	
+	// 3. add event listeners to textareas
 	document.getElementById(DOMstrings.textarea_1).addEventListener('keyup', checkFormFull);
 	document.getElementById(DOMstrings.textarea_2).addEventListener('keyup', checkFormFull);
 }
 
 
+// Function to process input areas after they are displayed
 function processForm() {
+
+	// 1. implement rating system
 	addRatingListener();
+	// 2. add event listeners to check form is full or not
 	addEventListenersToForm();
 }
 
 
+// Funtion to dynamically generate input area
 function displayForm(type, typeID) {
+
+	// 1. html to be inserted after mascot image is clicked
 	html = `<div class="rating-selection">
 				<div class="star-rating">
 					<h2>Overall Rating for Facilities <span>(1-lowest, 5-highest)</span></h2>
@@ -146,10 +208,11 @@ function displayForm(type, typeID) {
 					<span id="3" class="fa fa-star"></span>
 					<span id="4" class="fa fa-star"></span>
 					<span id="5" class="fa fa-star"></span>
+					<span id="rating-remark"></span>
 				</div>
 
 				<div class="reasons-for-selection">
-					<h2>Share your reasons for selecting <span>${type}</span></h2>
+					<h2>Share your reasons for selecting <span id="choosen-mascot">${type}</span></h2>
 					
 					<label>
 						<input id="checkbox-1" type="checkbox" name="reason">
@@ -184,18 +247,27 @@ function displayForm(type, typeID) {
 				<textarea id="textarea-2" rows="6"></textarea>
 			</div>`;
 
+	// 2. Clear all the content previously present
 	document.querySelector(DOMstrings.invisible_content).innerHTML = '';
+	// 3. Move content up to make space to display input boxes
 	document.querySelector(DOMstrings.choose_mascot).style.marginTop = '10px';
 
+	// 4. Make every mascot image blur
 	makeAllBlur();
+	// 5. Make mascot image which is selected non-blur
 	document.getElementById(typeID).style.opacity = '1';
+	// 6. insert above html before div ends
 	document.querySelector(DOMstrings.invisible_content).insertAdjacentHTML('beforeend', html);
+	// 7. display go to next department button
 	document.querySelector(DOMstrings.department_button).style.display = 'block';
-
+	// 8. Disable previously enabled button
+	disableDeptButton();
+	// 9. start processing form after displaying it
 	processForm();
 }
 
 
+// Function to add event listeners to all mascot images
 function addEventListeners() {
 	document.querySelector(DOMstrings.oyster).addEventListener('click', function(event) {
 		displayForm('World is my Oyster', DOMstrings.oyster_div);
@@ -223,4 +295,5 @@ function addEventListeners() {
 }
 
 
+// call function to add event listeners to mascot images
 addEventListeners();

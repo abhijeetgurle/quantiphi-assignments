@@ -1,3 +1,4 @@
+/* Styling for body on all pages */
 body {
 	background-image: url(../img/background.jpeg);
 	font-family: 'Raleway', sans-serif;
@@ -6,22 +7,26 @@ body {
 	margin-right: 0px; 
 }
 
+/* style to center contents */
 .center-content {
 	padding-top: 10%;
 	text-align: center;
 }
 
+/* styling to quantiphi logo on index.html */
 #quantiphi-logo-main {
 	width: 20%;
 	height: 20%;
 }
 
+/* styling to Welecome message on index.html */
 #welcome-message {
 	margin-top: 0px;
 	margin-bottom: 20px;
 	font-size: 70px;
 }
 
+/* Green quantiphi styled button displayed on many pages */
 .green-button {
 	color: white;
 	text-transform: uppercase;
@@ -58,31 +63,37 @@ body {
   	padding-bottom: 0px;
 }
 
+/* Style to display quantiphi logo in navigation bar */
 .quantiphi-logo-nav {
 	float: left;
 	height: 30%;
 	width: 30%;
 }
 
+/* Font size for tutorial question */
 #tutorial-question {
 	font-size: 50px;
 }
 
+/* Styles to display white button on tutorial_question.html */
 #white-button {
 	color: black;
 	background-color: rgb(255, 255, 255);
 	margin-left: 30px;
 }
 
+/* styles to display department div on  tutorial_question.html */
 .department {
 	margin-left: 5%;
 	margin-right: 5%;
 }
 
+/* Setting the width of information displayed on tutorial_question.html */
 .info-div {	
 	width: 70%;
 }
 
+/* Styles for go to next department div */
 .department-button {
 	position: absolute;
 	left: 68%;
@@ -91,20 +102,24 @@ body {
 	display: none;
 }
 
+/* styles for got to next department button */
 .department-button button {
 	background-color: gray;
 }
 
+/* Styles to display choose mascot heading */
 .choose-mascot {
 	font-size: 20px;
 	margin-bottom: 0px; 
 }
 
+/* Styles to display font inside brackets of choose mascot */
 .choose-mascot span {
 	font-size: 15px;
 	font-weight: 100;
 }
 
+/* styles to display mascot image and its text */
 .mascots {
 	border: 1px solid gray;
 	height: 170px;
@@ -145,10 +160,12 @@ body {
   	z-index: 1;
 }
 
+/* Display mascot discription when hovered over it */
 .mascot-image-content:hover .mascot-description {
 	visibility: visible;
 }
 
+/* Styles to display star rating system */
 .rating-selection {
 	float: left;
 	width: 33%;
@@ -167,16 +184,29 @@ body {
 	padding-left: 20px;
 }
 
+/* When the star is clicked */
 .star-checked {
   color: orange;
 }
 
+#rating-remark {
+	color: red;
+	margin-left: 10px;
+	text-transform: uppercase;
+}
+
+/* Styles to display reasons for selection checkboxes */
 .reasons-for-selection label {
 	display: block;
 	font-size: 20px;
 	margin-bottom: 10px;
 }
 
+#choosen-mascot {
+	color: red;
+}
+
+/* Styles to display textarea as reasons for selection */
 .more-reasons-for-selection {
 	width: 32%;
 	float: left;
@@ -196,6 +226,7 @@ body {
     width: 90%;
 }
 
+/* Styles to display textarea for suggestions */
 .suggestions {
 	width: 33%;
 	float: right;
