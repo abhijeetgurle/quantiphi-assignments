@@ -9,7 +9,7 @@
 	<script type="text/javascript" src="{% static 'js/lib/jquery-2.1.4.min.js' %}"></script>
 </head>
 <body>
-	
+
 	<div class="topnav">
 	  <a href="{%url 'logout_user' %}">Logout</a>
 	  <a href="#">Signed in as {{ current_user.username }}</a>
@@ -21,7 +21,11 @@
 
 		<ul>
 			{% for task in tasks %}
-    			<li><span><i class="fa fa-trash"></i></span> {{ task }}</li>
+				{% if task.status == "not_completed" %}
+    				<li><span><i class="fa fa-trash"></i></span> {{ task.title }}</li>
+    			{% else %}
+    				<li class="completed"><span><i class="fa fa-trash"></i></span> {{ task.title }}</li>	
+    			{% endif %}
 			{% endfor %}
 		</ul>
 	</div>

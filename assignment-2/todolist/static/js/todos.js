@@ -1,8 +1,29 @@
 // Check Off Specific Todos By Clicking
 $("ul").on("click", "li", function(){
+	
 	$(this).toggleClass("completed");
 
-	
+	var one_task = $(this).text()
+	one_task = one_task.slice(1, one_task.length);
+
+	if($(this).hasClass("completed")) {
+
+		$.post('update_status', { title: one_task, status: "completed" }, 
+	    	function(returnedData){
+	        	console.log(returnedData);
+			}).fail(function(error){
+	      		alert(error);
+		});
+	}
+	else {
+
+		$.post('update_status', { title: one_task, status: "not_completed" }, 
+	    	function(returnedData){
+	        	console.log(returnedData);
+			}).fail(function(error){
+	      		alert(error);
+		});
+	}
 });
 
 //Click on X to delete Todo

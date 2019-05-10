@@ -7,5 +7,6 @@ urlpatterns = [
 	path('signup', views.signup, name='signup'),
     path('index', views.show_tasks, name='show_tasks'),
     path('add', views.add_task, name='add_task'),
+    path('update_status', views.update_status, name='update_status'),
     path('delete', views.delete_task, name='delete_task'),
 ]

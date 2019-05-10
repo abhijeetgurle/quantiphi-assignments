@@ -43,7 +43,7 @@ def signup(request):
 def show_tasks(request):
 
 	if request.user.is_authenticated:
-		tasks = Task.objects.filter(author = request.user)
+		tasks = Task.objects.filter(author = request.user).values('title', 'status')
 		return render(request, 'todolist/index.html', {'tasks': tasks, 'current_user': request.user})
 	else:
 		return HttpResponseRedirect('/')
@@ -62,7 +62,26 @@ def add_task(request):
 			task.save()
 			return HttpResponse("Sucess")
 
-	return HttpResponse("Failed")		
+	return HttpResponse("Failed")
+
+
+@csrf_exempt
+def update_status(request):
+	
+	if request.POST:
+		title = request.POST['title']
+		status = request.POST['status']
+
+		if request.user.is_authenticated:
+			author = request.user
+			print(title)
+			print(Task.objects.filter(author = request.user, title = title))
+			task = Task.objects.get(author = request.user, title = title)
+			task.status = status
+			task.save()
+			return HttpResponse("Sucess")
+
+	return HttpResponse("Failed")			
 
 
 @csrf_exempt
