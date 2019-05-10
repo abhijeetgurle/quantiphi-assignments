@@ -3,6 +3,7 @@ from django.http import *
 from django.contrib.auth import authenticate, login, logout
 from .models import Task
 from django.contrib.auth.forms import UserCreationForm
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def login_user(request):
@@ -45,4 +46,33 @@ def show_tasks(request):
 		tasks = Task.objects.filter(author = request.user)
 		return render(request, 'todolist/index.html', {'tasks': tasks, 'current_user': request.user})
 	else:
-		return HttpResponseRedirect('/')	
+		return HttpResponseRedirect('/')
+
+
+@csrf_exempt
+def add_task(request):
+	
+	if request.POST:
+		title = request.POST['title']
+		status = request.POST['status']
+
+		if request.user.is_authenticated:
+			author = request.user
+			task = Task(author = request.user, title = title, status = status);
+			task.save()
+			return HttpResponse("Sucess")
+
+	return HttpResponse("Failed")		
+
+
+@csrf_exempt
+def delete_task(request):
+
+	if request.POST:
+		task = request.POST['task']
+
+		if request.user.is_authenticated:
+			Task.objects.filter(author = request.user, title = task).delete()
+			return HttpResponse("Sucess")
+
+	return HttpResponse("Failed")	

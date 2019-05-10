@@ -6,6 +6,7 @@ from django.utils import timezone
 class Task(models.Model):
 	author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	title = models.TextField()
+	status = models.CharField(max_length=200)
 
 	
 	def __str__(self):
