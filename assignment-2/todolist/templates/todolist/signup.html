@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todo List</title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+	<style type="text/css" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></style>
+</head>
+<body>
+
+	<div id="login-form">
+		<form method="POST">{% csrf_token %} 
+			<h1>Sign Up</h1>
+			{{ form.as_p }}
+			<input type="submit" value="Sign Up">
+			<h6>Already have Account? <a href="{%url 'login_user' %}">LogIn</a></h6>
+		</form>
+	</div>
+
+</body>
+</html>
