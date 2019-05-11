@@ -1,3 +1,4 @@
+/* Set the background to linear gradient */
 body {
   background: -webkit-linear-gradient(90deg, #2BC0E4 10%, #EAECC6 90%); /* Chrome 10+, Saf5.1+ */
   background:    -moz-linear-gradient(90deg, #2BC0E4 10%, #EAECC6 90%); /* FF3.6+ */
@@ -6,6 +7,7 @@ body {
   background:         linear-gradient(90deg, #2BC0E4 10%, #EAECC6 90%); /* W3C */
 }
 
+/* Styling for login and signup forms */
 #login-form {
 	width: 360px;
 	margin: 100px auto;
@@ -40,6 +42,7 @@ body {
 	color: orange;
 }
 
+/* Styling for error messages to be displayed */
 .error-message {
 	text-align: center;
 	color: red;

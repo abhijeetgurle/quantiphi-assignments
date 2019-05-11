@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 
 # Create your views here.
+# View to login user
 def login_user(request):
 	username = password = ''
 	if request.POST:
@@ -24,11 +25,13 @@ def login_user(request):
 	return render(request, 'todolist/login.html', {})
 
 
+# View to logout user
 def logout_user(request):
 	logout(request)
 	return HttpResponseRedirect('/')
 
 
+# View to signup user
 def signup(request):
 	if request.method == 'POST':
 		form = UserCreationForm(request.POST)
@@ -49,6 +52,7 @@ def signup(request):
 	return render(request, 'todolist/signup.html', {'form': form})
 
 
+# View to show all tasks based on loggedIn user 
 def show_tasks(request):
 
 	if request.user.is_authenticated:
@@ -58,6 +62,7 @@ def show_tasks(request):
 		return HttpResponseRedirect('/')
 
 
+# View to add task to database
 @csrf_exempt
 def add_task(request):
 	
@@ -74,6 +79,7 @@ def add_task(request):
 	return HttpResponse("Failed")
 
 
+# View to update status of task
 @csrf_exempt
 def update_status(request):
 	
@@ -93,6 +99,7 @@ def update_status(request):
 	return HttpResponse("Failed")			
 
 
+# View to delete task in database
 @csrf_exempt
 def delete_task(request):
 

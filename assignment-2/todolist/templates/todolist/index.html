@@ -10,11 +10,13 @@
 </head>
 <body>
 
+	<!-- Code for navigation bar -->
 	<div class="topnav">
 	  <a href="{%url 'logout_user' %}">Logout</a>
 	  <a href="#">Signed in as {{ current_user.username }}</a>
 	</div>
 
+	<!-- Container to show to-do list -->
 	<div id="container">
 		<h1>To-Do List <span id="toggle-form"><i class="fa fa-plus"></i></span></h1>
 		<input type="text" placeholder="Add New Todo">

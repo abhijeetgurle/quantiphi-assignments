@@ -1,3 +1,4 @@
+/* Set the background to linear gradient */
 body {
 	font-family: Roboto;
 	margin: 0;
@@ -8,6 +9,8 @@ body {
   background:         linear-gradient(90deg, #2BC0E4 10%, #EAECC6 90%); /* W3C */
 }
 
+
+/* Styling for list of todo tasks */
 ul {
 	list-style: none;
 	margin: 0;
@@ -25,9 +28,12 @@ h1 {
 	font-weight: normal;
 }
 
+
+/* Move plus icon to right of h1 */
 .fa-plus {
 	float: right;
 }
+
 
 li {
 	background: #fff;
@@ -36,9 +42,12 @@ li {
 	color: #666;
 }
 
+
+/* Make every 2nd child in li have gray background */
 li:nth-child(2n){
 	background: #f7f7f7;
 }
+
 
 li span {
 	background: #e74c3c;
@@ -52,6 +61,8 @@ li span {
 	opacity: 0;
 }
 
+
+/* Show delete icon when hovered over li */
 li:hover span {
 	width: 40px;
 	opacity: 1.0;
@@ -80,6 +91,8 @@ input:focus{
 	box-shadow: 0 0 3px rgba(0,0,0, 0.1);
 }
 
+
+/* Add line through effect when task is completed */
 .completed {
 	color: gray;
 	text-decoration: line-through;
