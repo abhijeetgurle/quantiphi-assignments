@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todo List</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/todos.css' %}">
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,700,500' rel='stylesheet' type='text/css'>
+	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+	<script type="text/javascript" src="{% static 'js/lib/jquery-2.1.4.min.js' %}"></script>
+</head>
+<body>
+
+	<div class="topnav">
+	  <a href="{%url 'logout_user' %}">Logout</a>
+	  <a href="#">Signed in as {{ current_user.username }}</a>
+	</div>
+
+	<div id="container">
+		<h1>To-Do List <span id="toggle-form"><i class="fa fa-plus"></i></span></h1>
+		<input type="text" placeholder="Add New Todo">
+
+		<ul>
+			{% for task in tasks %}
+				{% if task.status == "not_completed" %}
+    				<li><span><i class="fa fa-trash"></i></span> {{ task.title }}</li>
+    			{% else %}
+    				<li class="completed"><span><i class="fa fa-trash"></i></span> {{ task.title }}</li>	
+    			{% endif %}
+			{% endfor %}
+		</ul>
+	</div>
+
+<script type="text/javascript" src="{% static 'js/todos.js' %}"></script>
+</body>
+</html>
