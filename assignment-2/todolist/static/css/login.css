@@ -39,3 +39,8 @@ body {
 #login-form h6 a {
 	color: orange;
 }
+
+.error-message {
+	text-align: center;
+	color: red;
+}

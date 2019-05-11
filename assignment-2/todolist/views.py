@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import Task
 from django.contrib.auth.forms import UserCreationForm
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib import messages
 
 # Create your views here.
 def login_user(request):
@@ -16,6 +17,9 @@ def login_user(request):
 			if user.is_active:
 				login(request, user)
 				return HttpResponseRedirect('/index')
+		else:
+			messages.error(request,'Username or Password not correct')
+			return HttpResponseRedirect('/')		
 
 	return render(request, 'todolist/login.html', {})
 
@@ -35,6 +39,11 @@ def signup(request):
 			user = authenticate(username=username, password=raw_password)
 			login(request, user)
 			return HttpResponseRedirect('/index')
+		
+		else:
+			messages.error(request,'Failed to Signup. Please make sure you have matched all criteria.')
+			return HttpResponseRedirect('/signup')	
+	
 	else:
 		form = UserCreationForm()
 	return render(request, 'todolist/signup.html', {'form': form})
